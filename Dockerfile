@@ -22,6 +22,8 @@ WORKDIR /app
 
 # Copy your script and lyrics
 COPY align.py .
-COPY lyrics.txt .
+COPY whatever.txt .
+COPY never-gonna-give-you-up.txt .
 
 ENTRYPOINT ["python", "align.py"]
+CMD []

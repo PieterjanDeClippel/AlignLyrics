@@ -1,13 +1,23 @@
 import sys
 import json
+import argparse
 import subprocess
 from aeneas.executetask import ExecuteTask
 from aeneas.task import Task
 
+
+parser = argparse.ArgumentParser()
+parser.add_argument("youtube_url", help="The URL of the YouTube video")
+parser.add_argument("lyrics_path", help="The path to a txt file containing the lyrics")
+args = parser.parse_args()
+
+youtube_url = args.youtube_url
+lyrics_file = args.lyrics_path
+print(f"Downloading from: {youtube_url}")
+
 # Replace with your actual YouTube URL
-youtube_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+# youtube_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 audio_file = "audio.mp3"
-lyrics_file = "lyrics.txt"
 output_file = "timestamps.json"
 
 # 1. Download and extract audio
@@ -36,4 +46,6 @@ with open(output_file, "r", encoding="utf-8") as f:
     print(f.read())
 
 # docker build -t lyrics-aligner .
-# docker run lyrics-aligner
+
+# docker run lyrics-aligner "https://www.youtube.com/watch?v=dQw4w9WgXcQ" "never-gonna-give-you-up.txt"
+# docker run lyrics-aligner "https://www.youtube.com/watch?v=EHfx9LXzxpw" "whatever.txt"
